@@ -12,8 +12,6 @@ AC_CONFIG_HEADERS([config.h])
 dnl Checks for programs.
 AC_PROG_CC
 if test -n "$GCC"; then
-   AC_DEFINE([ATTRIBUTE_UNUSED], [__attribute__ ((__unused__))],
-             [Define to the compiler's unused pragma])
    CFLAGS="$CFLAGS -Wall -Wshadow -Wwrite-strings"
    GCC_WEXTRA
    GCC_STACK_PROTECT_CC
@@ -23,16 +21,13 @@ dnl Uncomment the line below to compile with additional warnings enabled.
 dnl CFLAGS="$CFLAGS -pedantic -Wpointer-arith -Wcast-qual -Wcast-align -Wconversion -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wnested-externs"
 dnl Uncomment the line below to compile with gcov support.
 dnl   CFLAGS="$CFLAGS -fprofile-arcs -ftest-coverage"
-else
-   AC_DEFINE([ATTRIBUTE_UNUSED], [],
-             [Define to the compiler's unused pragma])
 fi
 AC_PROG_INSTALL
 AC_PROG_LN_S
 
 dnl Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS([arpa/inet.h netdb.h netinet/in.h sys/socket.h sys/time.h unistd.h getopt.h pcap.h sys/ioctl.h sys/stat.h fcntl.h])
+AC_CHECK_HEADERS([arpa/inet.h netdb.h netinet/in.h sys/socket.h sys/time.h unistd.h getopt.h sys/stat.h fcntl.h])
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
