@@ -39,6 +39,8 @@ static char const rcsid[] = "$Id$";   /* RCS ID for ident(1) */
 /* Global variables */
 static char filename[MAXLINE];
 static int filename_flag=0;
+static int network_flag=0;	/* Include the IP network address */
+static int broadcast_flag=0;	/* Include the IP broadcast address */
 
 int
 main(int argc, char *argv[]) {
@@ -98,7 +100,7 @@ main(int argc, char *argv[]) {
  */
 void
 usage(int status, int detailed) {
-   fprintf(stderr, "Usage: ipgen [options] <IP-network>\n");
+   fprintf(stderr, "Usage: ipgen [options] [IP-network, ...]\n");
    fprintf(stderr, "\n");
    fprintf(stderr, "The IP network can be specified as\n");
    fprintf(stderr, "IPnetwork/bits (e.g. 192.168.1.0/24) to specify all hosts\n");
@@ -107,7 +109,7 @@ usage(int status, int detailed) {
    fprintf(stderr, "inclusive range, or IPnetwork:NetMask (e.g. 192.168.1.0:255.255.255.0) to\n");
    fprintf(stderr, "specify all hosts in the given network and mask.\n");
    fprintf(stderr, "\n");
-   fprintf(stderr, "These different options for specifying target hosts may be used both on the\n");
+   fprintf(stderr, "These different options for specifying IP networks may be used both on the\n");
    fprintf(stderr, "command line, and also in the file specified with the --file option.\n");
    fprintf(stderr, "\n");
    if (detailed) {
@@ -115,9 +117,11 @@ usage(int status, int detailed) {
       fprintf(stderr, "\n");
       fprintf(stderr, "\n--help or -h\t\tDisplay this usage message and exit.\n");
       fprintf(stderr, "\n--file=<s> or -f <s>\tRead addresses from the specified file\n");
-      fprintf(stderr, "\t\t\tinstead of from the command line. One IP\n");
-      fprintf(stderr, "\t\t\taddress per line. Use \"-\" for standard input.\n");
+      fprintf(stderr, "\t\t\tinstead of from the command line. One IP network\n");
+      fprintf(stderr, "\t\t\tspecification per line. Use \"-\" for standard input.\n");
       fprintf(stderr, "\n--version or -V\t\tDisplay program version and exit.\n");
+      fprintf(stderr, "\n--network or -n\t\tInclude the IP network address.\n");
+      fprintf(stderr, "\n--broadcast or -b\tInclude the IP broadcast address.\n");
    } else {
       fprintf(stderr, "use \"ipgen --help\" for detailed information on the available options.\n");
    }
@@ -229,11 +233,17 @@ process_network(const char *pattern) {
       if (network != ipnet_val)
          warn_msg("WARNING: host part of %s is non-zero", pattern);
 /*
- *	Determine maximum and minimum host values. We include the host
- *	and broadcast.
+ *	Determine maximum and minimum host values.
  */
-      hoststart=0;
-      hostend=(1<<(32-numbits))-1;
+      if (network_flag) {
+         hoststart=0;
+      } else {
+         hoststart=1;
+      }
+      hostend=(1<<(32-numbits))-2;
+      if (broadcast_flag) {
+         hostend++;
+      }
 /*
  *	Calculate all host addresses in the range and print in dotted-quad
  *	format.
@@ -277,11 +287,17 @@ process_network(const char *pattern) {
       if (network != ipnet_val)
          warn_msg("WARNING: host part of %s is non-zero", pattern);
 /*
- *	Determine maximum and minimum host values. We include the host
- *	and broadcast.
+ *	Determine maximum and minimum host values.
  */
-      hoststart=0;
-      hostend=(1<<(32-numbits))-1;
+      if (network_flag) {
+         hoststart=0;
+      } else {
+         hoststart=1;
+      }
+      hostend=(1<<(32-numbits))-2;
+      if (broadcast_flag) {
+         hostend++;
+      }
 /*
  *	Calculate all host addresses in the range and print in dotted-quad
  *	format.
@@ -346,10 +362,12 @@ process_options(int argc, char *argv[]) {
       {"file", required_argument, 0, 'f'},
       {"help", no_argument, 0, 'h'},
       {"version", no_argument, 0, 'V'},
+      {"network", no_argument, 0, 'n'},
+      {"broadcast", no_argument, 0, 'b'},
       {0, 0, 0, 0}
    };
    const char *short_options =
-      "f:hV";
+      "f:hVnb";
    int arg;
    int options_index=0;
 
@@ -366,6 +384,12 @@ process_options(int argc, char *argv[]) {
             ipgen_version();
             exit(0);
             break;	/* NOTREACHED */
+         case 'n':	/* --network */
+            network_flag=1;
+            break;
+         case 'b':	/* --broadcast */
+            broadcast_flag=1;
+            break;
          default:	/* Unknown option */
             usage(EXIT_FAILURE, 0);
             break;	/* NOTREACHED */
