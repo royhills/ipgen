@@ -27,15 +27,13 @@ AC_PROG_LN_S
 
 dnl Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS([arpa/inet.h netdb.h netinet/in.h sys/socket.h sys/time.h unistd.h getopt.h sys/stat.h fcntl.h])
+AC_CHECK_HEADERS([arpa/inet.h netinet/in.h sys/socket.h unistd.h getopt.h])
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 
 dnl Check for the uint{8,16,32}_t types and, if we don't have them, define
 dnl them using types which will work on most systems.
-AC_NTA_CHECK_TYPE(uint8_t, unsigned char)
-AC_NTA_CHECK_TYPE(uint16_t, unsigned short)
 AC_NTA_CHECK_TYPE(uint32_t, unsigned int)
 
 dnl Checks for library functions.

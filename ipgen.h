@@ -56,10 +56,6 @@
 #include <unistd.h>
 #endif
 
-#ifdef HAVE_NETDB_H
-#include <netdb.h>
-#endif
-
 #ifdef HAVE_GETOPT_H
 #include <getopt.h>
 #else
@@ -81,14 +77,6 @@
 
 #ifdef HAVE_REGEX_H
 #include <regex.h>		/* Posix regular expression functions */
-#endif
-
-#ifdef HAVE_SYS_STAT_H
-#include <sys/stat.h>
-#endif
-
-#ifdef HAVE_FCNTL_H
-#include <fcntl.h>
 #endif
 
 /* Defines */
