@@ -1,0 +1,45 @@
+#!/bin/sh
+# $Id$
+#
+# check-run1 -- Shell script to test ipgen basic functionality
+#
+# Author: Roy Hills
+# Date: 9 March 2006
+#
+# This shell script checks that "ipgen --help" and "ipgen --version"
+# work.  These options don't use much of the ipgen functionality, so if
+# they fail, then there is a fundamental problem with the program.
+#
+TMPFILE=/tmp/ipgen-test.$$.tmp
+#
+echo "Checking ipgen --help ..."
+$srcdir/ipgen --help 2> $TMPFILE
+if test $? -ne 0; then
+   rm -f $TMPFILE
+   echo "FAILED"
+   exit 1
+fi
+grep '^Report bugs or send suggestions to ' $TMPFILE >/dev/null
+if test $? -ne 0; then
+   rm -f $TMPFILE
+   echo "FAILED"
+   exit 1
+fi
+echo "ok"
+#
+echo "Checking ipgen --version ..."
+$srcdir/ipgen --version 2> $TMPFILE
+if test $? -ne 0; then
+   rm -f $TMPFILE
+   echo "FAILED"
+   exit 1
+fi
+grep '^Copyright (C) ' $TMPFILE >/dev/null
+if test $? -ne 0; then
+   rm -f $TMPFILE
+   echo "FAILED"
+   exit 1
+fi
+echo "ok"
+#
+rm -f $TMPFILE
