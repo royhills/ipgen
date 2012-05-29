@@ -6,7 +6,7 @@
 .\" notice and this notice are preserved.
 .\"
 .\" $Id$
-.TH IPGEN 1 "May 26, 2012"
+.TH IPGEN 1 "May 29, 2012"
 .\" Please adjust this date whenever revising the man page.
 .SH NAME
 ipgen \- Output a list of host address from IP network specifications
@@ -14,12 +14,81 @@ ipgen \- Output a list of host address from IP network specifications
 .B ipgen
 .RI [ options ] " " [ IP-Network ...]
 .SH DESCRIPTION
+.B ipgen
+generates a list of IP host addresses from one or more IP network
+specifications.
+.PP
+The IP networks can be specified in the following ways:
+.IP "a)" 3
+CIDR notation IPnetwork/bits (e.g. 192.168.1.0/24)
+.IP "b)"
+Network and mask notation IPnetwork:NetMask (e.g. 192.168.1.0:255.255.255.0)
+.IP "c)"
+Range notation IPstart-IPend (e.g. 192.168.1.3-192.168.1.27)
+.IP "d)"
+Single IP Host Address (e.g. 192.168.1.1)
+.PP
+The CIDR and Network:mask notations generate IP host addresses excluding the
+network and broadcast addresses. So 10.0.0.0/29 would generate six IP addresses
+from 10.0.0.1 to 10.0.0.6 inclusive. But see the description of the --network
+(-n) and --broadcast (-b) options below.
+.PP
+The generated IP host addresses are written to standard output, with one IP
+address per line.
+.PP
+The IP networks may be specified either on the command line, or read from the
+file specified with the --file (-f) option.
 .SH OPTIONS
 .TP
 .B --help or -h
 Display this usage message and exit.
-.SH FILES
+.TP
+.B --file=<f> or -f <f>
+Read IP networks from the specified file instead of
+from the command line. One IP network specification per
+line. Use "-" for standard input.
+.TP
+.B --version or -V
+Display program version and exit.
+.TP
+.B --network or -n
+Include the IP network address.
+.TP
+.B --broadcast or -b
+Include the IP broadcast address.
 .SH EXAMPLES
+The example below shows
+.B ipgen
+generating a list of host addresses for the CIDR network 10.0.0.0/29. The
+network and broadcast addresses are not included by default.
+.PP
+.nf
+$ ipgen 10.0.0.0/29
+10.0.0.1
+10.0.0.2
+10.0.0.3
+10.0.0.4
+10.0.0.5
+10.0.0.6
+.fi
+.PP
+This next example shows two both a CIDR and a network and mask specification.
+The -n and -b options cause the network and broadcast addresses to be included.
+.PP
+.nf
+$ ipgen -n -b 10.0.0.0/29 10.1.0.0:255.255.255.252
+10.0.0.0
+10.0.0.1
+10.0.0.2
+10.0.0.3
+10.0.0.4
+10.0.0.5
+10.0.0.6
+10.0.0.7
+10.1.0.0
+10.1.0.1
+10.1.0.2
+10.1.0.3
+.fi
 .SH AUTHOR
 Roy Hills <Roy.Hills@nta-monitor.com>
-.SH "SEE ALSO"

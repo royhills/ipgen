@@ -92,39 +92,45 @@ main(int argc, char *argv[]) {
  *	Inputs:
  *
  *	status		Status code to pass to exit()
- *	detailed	zero for brief output, non-zero for detailed output
  *
  *	Returns:
  *
  *	None (this function never returns).
  */
 void
-usage(int status, int detailed) {
+usage(int status) {
    fprintf(stderr, "Usage: ipgen [options] [IP-network, ...]\n");
    fprintf(stderr, "\n");
-   fprintf(stderr, "The IP network can be specified as\n");
-   fprintf(stderr, "IPnetwork/bits (e.g. 192.168.1.0/24) to specify all hosts\n");
-   fprintf(stderr, "in the given network (network and broadcast addresses excluded) or\n");
-   fprintf(stderr, "IPstart-IPend (e.g. 192.168.1.3-192.168.1.27) to specify all hosts in the\n");
-   fprintf(stderr, "inclusive range, or IPnetwork:NetMask (e.g. 192.168.1.0:255.255.255.0) to\n");
-   fprintf(stderr, "specify all hosts in the given network and mask.\n");
+   fprintf(stderr, "ipgen generates a list of IP host addresses from one or more IP network\n");
+   fprintf(stderr, "specifications.\n");
    fprintf(stderr, "\n");
-   fprintf(stderr, "These different options for specifying IP networks may be used both on the\n");
-   fprintf(stderr, "command line, and also in the file specified with the --file option.\n");
+   fprintf(stderr, "The IP networks can be specified in the following ways:\n");
    fprintf(stderr, "\n");
-   if (detailed) {
-      fprintf(stderr, "Options:\n");
-      fprintf(stderr, "\n");
-      fprintf(stderr, "\n--help or -h\t\tDisplay this usage message and exit.\n");
-      fprintf(stderr, "\n--file=<s> or -f <s>\tRead addresses from the specified file\n");
-      fprintf(stderr, "\t\t\tinstead of from the command line. One IP network\n");
-      fprintf(stderr, "\t\t\tspecification per line. Use \"-\" for standard input.\n");
-      fprintf(stderr, "\n--version or -V\t\tDisplay program version and exit.\n");
-      fprintf(stderr, "\n--network or -n\t\tInclude the IP network address.\n");
-      fprintf(stderr, "\n--broadcast or -b\tInclude the IP broadcast address.\n");
-   } else {
-      fprintf(stderr, "use \"ipgen --help\" for detailed information on the available options.\n");
-   }
+   fprintf(stderr, "a) CIDR notation IPnetwork/bits (e.g. 192.168.1.0/24)\n");
+   fprintf(stderr, "b) Network and mask notation IPnetwork:NetMask (e.g. 192.168.1.0:255.255.255.0)\n");
+   fprintf(stderr, "c) Range notation IPstart-IPend (e.g. 192.168.1.3-192.168.1.27)\n");
+   fprintf(stderr, "d) Single IP Host Address (e.g. 192.168.1.1)\n");
+   fprintf(stderr, "\n");
+   fprintf(stderr, "The CIDR and Network:mask notations generate IP host addresses excluding the\n");
+   fprintf(stderr, "network and broadcast addresses. So 10.0.0.0/29 would generate six IP addresses\n");
+   fprintf(stderr, "from 10.0.0.1 to 10.0.0.6 inclusive. But see the description of the --network\n");
+   fprintf(stderr, "(-n) and --broadcast (-b) options below.\n");
+   fprintf(stderr, "\n");
+   fprintf(stderr, "The generated IP host addresses are written to standard output, with one IP\n");
+   fprintf(stderr, "address per line.\n");
+   fprintf(stderr, "\n");
+   fprintf(stderr, "The IP networks may be specified either on the command line, or read from the\n");
+   fprintf(stderr, "file specified with the --file (-f) option.\n");
+   fprintf(stderr, "\n");
+   fprintf(stderr, "Options:\n");
+   fprintf(stderr, "\n");
+   fprintf(stderr, "\n--help or -h\t\tDisplay this usage message and exit.\n");
+   fprintf(stderr, "\n--file=<f> or -f <f>\tRead IP networks from the specified file instead of\n");
+   fprintf(stderr, "\t\t\tfrom the command line. One IP network specification per\n");
+   fprintf(stderr, "\t\t\tline. Use \"-\" for standard input.\n");
+   fprintf(stderr, "\n--version or -V\t\tDisplay program version and exit.\n");
+   fprintf(stderr, "\n--network or -n\t\tInclude the IP network address.\n");
+   fprintf(stderr, "\n--broadcast or -b\tInclude the IP broadcast address.\n");
    fprintf(stderr, "\n");
    fprintf(stderr, "Report bugs or send suggestions to %s\n", PACKAGE_BUGREPORT);
    fprintf(stderr, "See the ipgen homepage at http://www.nta-monitor.com/tools/ipgen/\n");
@@ -378,7 +384,7 @@ process_options(int argc, char *argv[]) {
             filename_flag=1;
             break;
          case 'h':	/* --help */
-            usage(EXIT_SUCCESS, 1);
+            usage(EXIT_SUCCESS);
             break;	/* NOTREACHED */
          case 'V':	/* --version */
             ipgen_version();
@@ -391,7 +397,7 @@ process_options(int argc, char *argv[]) {
             broadcast_flag=1;
             break;
          default:	/* Unknown option */
-            usage(EXIT_FAILURE, 0);
+            usage(EXIT_FAILURE);
             break;	/* NOTREACHED */
       }
    }

@@ -97,7 +97,7 @@ void warn_sys(const char *, ...);
 void err_msg(const char *, ...);
 void warn_msg(const char *, ...);
 void err_print(int, const char *, va_list);
-void usage(int, int);
+void usage(int);
 void process_network(const char *);
 void ipgen_version(void);
 void process_options(int, char *[]);
