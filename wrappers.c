@@ -16,8 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with ipgen.  If not, see <http://www.gnu.org/licenses/>.
  *
- * $Id$
- *
  * Author: Roy Hills
  * Date: 8 November 2003
  *
@@ -34,8 +32,6 @@
  */
 
 #include "ipgen.h"
-
-static char rcsid[] = "$Id$";	/* RCS ID for ident(1) */
 
 void *Malloc(size_t size) {
    void *result;
@@ -72,8 +68,4 @@ long int Strtol(const char *nptr, int base) {
       err_msg("ERROR: \"%s\" is not a valid numeric value", nptr);
 
    return result;
-}
-
-void wrappers_use_rcsid(void) {
-   fprintf(stderr, "%s\n", rcsid);	/* Use rcsid to stop compiler optimising away */
 }

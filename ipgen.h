@@ -16,8 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with ipgen.  If not, see <http://www.gnu.org/licenses/>.
  *
- * $Id$
- *
  * ipgen.h -- Header file for ipgen
  *
  * Author:	Roy Hills
@@ -107,7 +105,3 @@ void *Malloc(size_t);
 unsigned long int Strtoul(const char *, int);
 long int Strtol(const char *, int);
 char *dupstr(const char *);
-/* The following functions are just to prevent rcsid being optimised away */
-void wrappers_use_rcsid(void);
-void error_use_rcsid(void);
-void utils_use_rcsid(void);

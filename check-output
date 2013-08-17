@@ -16,8 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with ipgen.  If not, see <http://www.gnu.org/licenses/>.
 #
-# $Id$
-#
 # check-output - Shell script to test ipgen output
 #
 # Author: Roy Hills

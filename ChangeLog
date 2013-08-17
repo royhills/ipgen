@@ -1,4 +1,13 @@
-$Id$
+2013-08-17 Roy Hills <Roy.Hills@nta-monitor.com>
+
+	* Removed $Id$ keywords from all files, and associated rcsid variables
+	  from C source. These are not really needed and they don't work with
+	  git.
+
+	* .gitignore: new file containing file patterns that should not be
+	  committed to the repository.
+
+	* .travis.yml: new file to enable automatic building on Travis CI
 
 2013-08-17 Roy Hills <Roy.Hills@nta-monitor.com>
 

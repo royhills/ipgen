@@ -16,8 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with ipgen  If not, see <http://www.gnu.org/licenses/>.
  *
- * $Id$
- *
  * ipgen
  *
  * Author:	Roy Hills
@@ -33,8 +31,6 @@
  */
 
 #include "ipgen.h"
-
-static char const rcsid[] = "$Id$";   /* RCS ID for ident(1) */
 
 /* Global variables */
 static char filename[MAXLINE];
@@ -425,9 +421,4 @@ ipgen_version (void) {
    fprintf(stderr, "General Public License.\n");
    fprintf(stderr, "For more information about these matters, see the file named COPYING.\n");
    fprintf(stderr, "\n");
-/* We use rcsid here to prevent it being optimised away */
-   fprintf(stderr, "%s\n", rcsid);
-   error_use_rcsid();
-   wrappers_use_rcsid();
-   utils_use_rcsid();
 }
