@@ -24,3 +24,4 @@ For usage information, including details of all the options, use:
 
 $ ipgen --help
 
+or see the man page ipgen(1).
