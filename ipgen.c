@@ -1,5 +1,5 @@
 /*
- * ipgen is Copyright (C) 2012 Roy Hills, NTA Monitor Ltd.
+ * ipgen is Copyright (C) 2012-2013 Roy Hills, NTA Monitor Ltd.
  *
  * This file is part of ipgen.
  * 
@@ -415,9 +415,9 @@ process_options(int argc, char *argv[]) {
 void
 ipgen_version (void) {
    fprintf(stderr, "%s\n\n", PACKAGE_STRING);
-   fprintf(stderr, "Copyright (C) 2012 Roy Hills, NTA Monitor Ltd.\n");
+   fprintf(stderr, "Copyright (C) 2012-2013 Roy Hills, NTA Monitor Ltd.\n");
    fprintf(stderr, "ipgen comes with NO WARRANTY to the extent permitted by law.\n");
-   fprintf(stderr, "You may redistribute copies of arp-scan under the terms of the GNU\n");
+   fprintf(stderr, "You may redistribute copies of ipgen under the terms of the GNU\n");
    fprintf(stderr, "General Public License.\n");
    fprintf(stderr, "For more information about these matters, see the file named COPYING.\n");
    fprintf(stderr, "\n");
