@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT([ipgen],[1.0],[ipgen@nta-monitor.com])
+AC_INIT([ipgen],[1.0],[https://github.com/royhills/ipgen])
 AC_PREREQ(2.61)
 AC_REVISION($Revision$)
 AC_CONFIG_SRCDIR([ipgen.c])

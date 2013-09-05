@@ -1,3 +1,11 @@
+2013-09-05 Roy Hills <Roy.Hills@nta-monitor.com>
+
+	* configure.ac: Change the bug-report string in AC_INIT from the
+	  ipgen email address to the github URL.
+
+	* ipgen.c, check-run1:  updated to take account of changes to
+	  bug-report string.
+
 2013-08-17 Roy Hills <Roy.Hills@nta-monitor.com>
 
 	* Removed $Id$ keywords from all files, and associated rcsid variables

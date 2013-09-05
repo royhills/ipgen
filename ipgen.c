@@ -128,7 +128,7 @@ usage(int status) {
    fprintf(stderr, "\n--network or -n\t\tInclude the IP network address.\n");
    fprintf(stderr, "\n--broadcast or -b\tInclude the IP broadcast address.\n");
    fprintf(stderr, "\n");
-   fprintf(stderr, "Report bugs or send suggestions to %s\n", PACKAGE_BUGREPORT);
+   fprintf(stderr, "Report bugs or send suggestions at %s\n", PACKAGE_BUGREPORT);
    fprintf(stderr, "See the ipgen homepage at http://www.nta-monitor.com/tools/ipgen/\n");
    exit(status);
 }
