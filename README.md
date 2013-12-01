@@ -1,6 +1,7 @@
 # ipgen
 
 [![Build Status](https://secure.travis-ci.org/royhills/ipgen.png)](http://travis-ci.org/royhills/ipgen)
+[![Coverage Status](https://coveralls.io/repos/royhills/ipgen/badge.png?branch=master)](https://coveralls.io/r/royhills/ipgen?branch=master)
 
 Output a list of host address from IP network specifications.
 
