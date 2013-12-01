@@ -1,3 +1,8 @@
+2013-12-01 Roy Hills <Roy.Hills@nta-monitor.com>
+
+	* configure.ac, .gitignore: Added configure option --enable-gcov to
+	  enable gcov code coverage.
+
 2013-09-05 Roy Hills <Roy.Hills@nta-monitor.com>
 
 	* configure.ac: Change the bug-report string in AC_INIT from the

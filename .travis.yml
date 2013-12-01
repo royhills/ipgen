@@ -2,4 +2,14 @@ language: c
 compiler:
   - gcc
   - clang
+env:
+  - GCOV_OPT="--enable-gcov"
+  - GCOV_OPT="--disable-gcov"
+matrix:
+  exclude:
+    - compiler: clang
+      env: GCOV_OPT="--enable-gcov"
+before_install:
+  - sudo pip install cpp-coveralls --use-mirrors
 script: autoreconf --install && ./configure && make && make check
+after_success: if [ $GCOV_OPT == "--enable-gcov" ]; then coveralls --exclude lib --exclude tests; fi
