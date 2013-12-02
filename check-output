@@ -21,7 +21,7 @@
 # Author: Roy Hills
 # Date: 28 May 2012
 #
-# This script checks that ipgen producces the correct output.
+# This script checks that ipgen produces the correct output.
 #
 
 IPGENOUTPUT=/tmp/ipgen-output.$$.tmp

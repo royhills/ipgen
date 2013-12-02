@@ -4,7 +4,7 @@ AM_CPPFLAGS = -DDATADIR=\"$(pkgdatadir)\"
 #
 bin_PROGRAMS = ipgen
 #
-dist_check_SCRIPTS = check-run1 check-output
+dist_check_SCRIPTS = check-run1 check-output check-error
 #
 dist_man_MANS = ipgen.1
 #

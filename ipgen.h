@@ -103,5 +103,4 @@ void process_options(int, char *[]);
 /* Wrappers */
 void *Malloc(size_t);
 unsigned long int Strtoul(const char *, int);
-long int Strtol(const char *, int);
 char *dupstr(const char *);

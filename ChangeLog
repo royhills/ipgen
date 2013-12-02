@@ -6,6 +6,8 @@
 	* check-output: Added tests to check single host, network and
 	  broadcast, and reading input from a file.
 
+	* check-error: New test to check ipgen error behaviour.
+
 2013-12-01 Roy Hills <Roy.Hills@nta-monitor.com>
 
 	* configure.ac, .gitignore: Added configure option --enable-gcov to

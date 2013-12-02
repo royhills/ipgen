@@ -1,0 +1,75 @@
+#!/bin/sh
+# ipgen is Copyright (C) 2012 Roy Hills, NTA Monitor Ltd.
+#
+# This file is part of ipgen.
+#
+# ipgen is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# ipgen is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with ipgen.  If not, see <http://www.gnu.org/licenses/>.
+#
+# check-error - Shell script to test ipgen error handling
+#
+# Author: Roy Hills
+# Date: 02 December 2013
+#
+# This script checks that ipgen handles errors as expected.
+#
+
+IPGENOUTPUT=/tmp/ipgen-output.$$.tmp
+
+echo "Checking invalid CIDR network address..."
+$srcdir/ipgen 300.400.500.600/24 > $IPGENOUTPUT 2>&1
+if test $? -eq 0; then
+   rm -f $IPGENOUTPUT
+   echo "FAILED"
+   exit 1
+fi
+grep '^ERROR: 300.400.500.600 is not a valid IP address' $IPGENOUTPUT >/dev/null
+if test $? -ne 0; then
+   rm -f $IPGENOUTPUT
+   echo "FAILED"
+   exit 1
+fi
+echo "ok"
+rm -f $IPGENOUTPUT
+#
+echo "Checking invalid CIDR network bits..."
+$srcdir/ipgen 10.0.0.0/99 > $IPGENOUTPUT 2>&1
+if test $? -eq 0; then
+   rm -f $IPGENOUTPUT
+   echo "FAILED"
+   exit 1
+fi
+grep '^ERROR: Number of bits in 10.0.0.0/99 must be between 3 and 32' $IPGENOUTPUT >/dev/null
+if test $? -ne 0; then
+   rm -f $IPGENOUTPUT
+   echo "FAILED"
+   exit 1
+fi
+echo "ok"
+rm -f $IPGENOUTPUT
+#
+echo "Checking non-zero host bits..."
+$srcdir/ipgen 10.0.0.1/30 > $IPGENOUTPUT 2>&1
+if test $? -ne 0; then
+   rm -f $IPGENOUTPUT
+   echo "FAILED"
+   exit 1
+fi
+grep '^WARNING: host part of 10.0.0.1/30 is non-zero' $IPGENOUTPUT >/dev/null
+if test $? -ne 0; then
+   rm -f $IPGENOUTPUT
+   echo "FAILED"
+   exit 1
+fi
+echo "ok"
+rm -f $IPGENOUTPUT
