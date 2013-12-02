@@ -181,24 +181,21 @@ process_network(const char *pattern) {
       if ((result=regcomp(&iprange_pat, iprange_pat_str,
                           REG_EXTENDED|REG_NOSUB))) {
          char errbuf[MAXLINE];
-         size_t errlen;
-         errlen=regerror(result, &iprange_pat, errbuf, MAXLINE);
+         regerror(result, &iprange_pat, errbuf, MAXLINE);
          err_msg("ERROR: cannot compile regex pattern \"%s\": %s",
                  iprange_pat_str, errbuf);
       }
       if ((result=regcomp(&ipslash_pat, ipslash_pat_str,
                           REG_EXTENDED|REG_NOSUB))) {
          char errbuf[MAXLINE];
-         size_t errlen;
-         errlen=regerror(result, &ipslash_pat, errbuf, MAXLINE);
+         regerror(result, &ipslash_pat, errbuf, MAXLINE);
          err_msg("ERROR: cannot compile regex pattern \"%s\": %s",
                  ipslash_pat_str, errbuf);
       }
       if ((result=regcomp(&ipmask_pat, ipmask_pat_str,
                           REG_EXTENDED|REG_NOSUB))) {
          char errbuf[MAXLINE];
-         size_t errlen;
-         errlen=regerror(result, &ipmask_pat, errbuf, MAXLINE);
+         regerror(result, &ipmask_pat, errbuf, MAXLINE);
          err_msg("ERROR: cannot compile regex pattern \"%s\": %s",
                  ipmask_pat_str, errbuf);
       }

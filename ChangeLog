@@ -1,5 +1,13 @@
 2013-12-01 Roy Hills <Roy.Hills@nta-monitor.com>
 
+	* ipgen.c: Removed occurances of set but unused variables as
+	  reported by -Wunused-but-set-variable in gcc 4.6.
+
+	* check-output: Added tests to check single host, network and
+	  broadcast, and reading input from a file.
+
+2013-12-01 Roy Hills <Roy.Hills@nta-monitor.com>
+
 	* configure.ac, .gitignore: Added configure option --enable-gcov to
 	  enable gcov code coverage.
 

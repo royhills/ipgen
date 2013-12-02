@@ -25,9 +25,10 @@
 #
 
 IPGENOUTPUT=/tmp/ipgen-output.$$.tmp
+IPGENINPUT=/tmp/ipgen-input.$$.tmp
 EXAMPLEOUTPUT=/tmp/example-output.$$.tmp
 
-echo "Checking ipgen output ..."
+echo "Checking ipgen output for CIDR, net:mask, range and host..."
 cat >$EXAMPLEOUTPUT <<_EOF_
 10.0.0.1
 10.0.0.2
@@ -47,8 +48,9 @@ cat >$EXAMPLEOUTPUT <<_EOF_
 10.2.0.4
 10.2.0.5
 10.2.0.6
+10.3.0.1
 _EOF_
-$srcdir/ipgen 10.0.0.0/29 10.1.0.0:255.255.255.248 10.2.0.1-10.2.0.6 > $IPGENOUTPUT 2>&1
+$srcdir/ipgen 10.0.0.0/29 10.1.0.0:255.255.255.248 10.2.0.1-10.2.0.6 10.3.0.1 > $IPGENOUTPUT 2>&1
 if test $? -ne 0; then
    rm -f $IPGENOUTPUT
    rm -f $EXAMPLEOUTPUT
@@ -63,5 +65,80 @@ if test $? -ne 0; then
    exit 1
 fi
 echo "ok"
+rm -f $IPGENOUTPUT
+rm -f $EXAMPLEOUTPUT
+#
+echo "Checking ipgen output with --network and --broadcast..."
+cat >$EXAMPLEOUTPUT <<_EOF_
+10.0.0.0
+10.0.0.1
+10.0.0.2
+10.0.0.3
+10.0.0.4
+10.0.0.5
+10.0.0.6
+10.0.0.7
+10.1.0.0
+10.1.0.1
+10.1.0.2
+10.1.0.3
+10.1.0.4
+10.1.0.5
+10.1.0.6
+10.1.0.7
+_EOF_
+$srcdir/ipgen -n -b 10.0.0.0/29 10.1.0.0:255.255.255.248 > $IPGENOUTPUT 2>&1
+if test $? -ne 0; then
+   rm -f $IPGENOUTPUT
+   rm -f $EXAMPLEOUTPUT
+   echo "FAILED"
+   exit 1
+fi
+cmp -s $IPGENOUTPUT $EXAMPLEOUTPUT
+if test $? -ne 0; then
+   rm -f $IPGENOUTPUT
+   rm -f $EXAMPLEOUTPUT
+   echo "FAILED"
+   exit 1
+fi
+echo "ok"
+rm -f $IPGENOUTPUT
+rm -f $EXAMPLEOUTPUT
+#
+echo "Checking ipgen reading from file..."
+cat >$IPGENINPUT <<_EOF_
+10.0.0.0/29
+10.1.0.0:255.255.255.248
+_EOF_
+cat >$EXAMPLEOUTPUT <<_EOF_
+10.0.0.1
+10.0.0.2
+10.0.0.3
+10.0.0.4
+10.0.0.5
+10.0.0.6
+10.1.0.1
+10.1.0.2
+10.1.0.3
+10.1.0.4
+10.1.0.5
+10.1.0.6
+_EOF_
+$srcdir/ipgen -f $IPGENINPUT > $IPGENOUTPUT 2>&1
+if test $? -ne 0; then
+   rm -f $IPGENOUTPUT
+   rm -f $EXAMPLEOUTPUT
+   echo "FAILED"
+   exit 1
+fi
+cmp -s $IPGENOUTPUT $EXAMPLEOUTPUT
+if test $? -ne 0; then
+   rm -f $IPGENOUTPUT
+   rm -f $EXAMPLEOUTPUT
+   echo "FAILED"
+   exit 1
+fi
+echo "ok"
+rm -f $IPGENINPUT
 rm -f $IPGENOUTPUT
 rm -f $EXAMPLEOUTPUT
