@@ -15,4 +15,4 @@ before_install:
 script:
   - autoreconf --install && ./configure $GCOV_OPT && make && make check
 after_success:
-  - if [ $GCOV_OPT == "--enable-gcov" ]; then coveralls ; fi
+  - if [ $GCOV_OPT == "--enable-gcov" ]; then coveralls --verbose ; fi
