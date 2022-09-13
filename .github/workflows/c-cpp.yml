@@ -16,6 +16,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: install autotools
+      run: brew install automake
+      if: matrix.os == 'macos-latest'
     - name: autoreconf
       run: autoreconf --install
     - name: configure
