@@ -1,7 +1,7 @@
 # ipgen
 
 [![Build](https://github.com/royhills/ipgen/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/royhills/ipgen/actions/workflows/c-cpp.yml)
-[![Coverage Status](https://coveralls.io/repos/royhills/ipgen/badge.png?branch=master)](https://coveralls.io/r/royhills/ipgen?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/royhills/tcp-scan/badge.svg?branch=master)](https://coveralls.io/github/royhills/tcp-scan?branch=master)
 
 Output a list of host address from IP network specifications.
 
