@@ -27,7 +27,7 @@
 IPGENOUTPUT=/tmp/ipgen-output.$$.tmp
 
 echo "Checking invalid CIDR network address..."
-$srcdir/ipgen 300.400.500.600/24 > $IPGENOUTPUT 2>&1
+./ipgen 300.400.500.600/24 > $IPGENOUTPUT 2>&1
 if test $? -eq 0; then
    rm -f $IPGENOUTPUT
    echo "FAILED"
@@ -43,7 +43,7 @@ echo "ok"
 rm -f $IPGENOUTPUT
 #
 echo "Checking invalid CIDR network bits..."
-$srcdir/ipgen 10.0.0.0/99 > $IPGENOUTPUT 2>&1
+./ipgen 10.0.0.0/99 > $IPGENOUTPUT 2>&1
 if test $? -eq 0; then
    rm -f $IPGENOUTPUT
    echo "FAILED"
@@ -59,7 +59,7 @@ echo "ok"
 rm -f $IPGENOUTPUT
 #
 echo "Checking non-zero host bits..."
-$srcdir/ipgen 10.0.0.1/30 > $IPGENOUTPUT 2>&1
+./ipgen 10.0.0.1/30 > $IPGENOUTPUT 2>&1
 if test $? -ne 0; then
    rm -f $IPGENOUTPUT
    echo "FAILED"

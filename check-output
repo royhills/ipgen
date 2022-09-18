@@ -50,7 +50,7 @@ cat >$EXAMPLEOUTPUT <<_EOF_
 10.2.0.6
 10.3.0.1
 _EOF_
-$srcdir/ipgen 10.0.0.0/29 10.1.0.0:255.255.255.248 10.2.0.1-10.2.0.6 10.3.0.1 > $IPGENOUTPUT 2>&1
+./ipgen 10.0.0.0/29 10.1.0.0:255.255.255.248 10.2.0.1-10.2.0.6 10.3.0.1 > $IPGENOUTPUT 2>&1
 if test $? -ne 0; then
    rm -f $IPGENOUTPUT
    rm -f $EXAMPLEOUTPUT
@@ -87,7 +87,7 @@ cat >$EXAMPLEOUTPUT <<_EOF_
 10.1.0.6
 10.1.0.7
 _EOF_
-$srcdir/ipgen -n -b 10.0.0.0/29 10.1.0.0:255.255.255.248 > $IPGENOUTPUT 2>&1
+./ipgen -n -b 10.0.0.0/29 10.1.0.0:255.255.255.248 > $IPGENOUTPUT 2>&1
 if test $? -ne 0; then
    rm -f $IPGENOUTPUT
    rm -f $EXAMPLEOUTPUT
@@ -124,7 +124,7 @@ cat >$EXAMPLEOUTPUT <<_EOF_
 10.1.0.5
 10.1.0.6
 _EOF_
-$srcdir/ipgen -f $IPGENINPUT > $IPGENOUTPUT 2>&1
+./ipgen -f $IPGENINPUT > $IPGENOUTPUT 2>&1
 if test $? -ne 0; then
    rm -f $IPGENOUTPUT
    rm -f $EXAMPLEOUTPUT
