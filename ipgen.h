@@ -28,16 +28,13 @@
 #include "config.h"
 #endif
 
-#ifdef STDC_HEADERS
+/* C89 standard headers */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdarg.h>
 #include <errno.h>
-#else
-#error This program requires the ANSI C Headers
-#endif
 
 #include <sys/types.h>
 

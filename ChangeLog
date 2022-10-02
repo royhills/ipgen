@@ -1,3 +1,21 @@
+2022-10-02 Roy Hills <Roy.Hills@nta-monitor.com>
+
+	* acinclude.m4: Removed unneeded macros AC_NTA_NET_SIZE_T,
+	  PGAC_TYPE_64BIT_INT, and PGAC_FUNC_SNPRINTF_LONG_LONG_INT_FORMAT
+	  as these are not required by ipgen. Fixed typo in
+	  'if test "X$CC" != "X"' check.
+
+	* configure.ac: Removed obsolete macros AC_HEADER_STDC and
+	  AC_C_CONST because all modern systems should have an ANSI C
+	  compiler. Removed function check for inet_aton as all modern
+	  systems should have this function (Solaris 8 doesn't have it
+	  but this has been obsolete for many years). Incremented version
+	  number to 1.1 to reflect recent changes.
+
+	* ipgen.h: Made ANSI C standard header includes unconditional.
+
+	* inet_aton.c: Removed
+
 2022-09-18 Roy Hills <Roy.Hills@nta-monitor.com>
 
 	* check-error, check-output, check-run1: Changed "$srcdir/ipgen" to

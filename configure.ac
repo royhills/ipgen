@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT([ipgen],[1.0],[https://github.com/royhills/ipgen])
+AC_INIT([ipgen],[1.1],[https://github.com/royhills/ipgen])
 AC_PREREQ(2.61)
 AC_REVISION($Revision$)
 AC_CONFIG_SRCDIR([ipgen.c])
@@ -40,11 +40,7 @@ AC_PROG_INSTALL
 AC_PROG_LN_S
 
 dnl Checks for header files.
-AC_HEADER_STDC
 AC_CHECK_HEADERS([arpa/inet.h netinet/in.h sys/socket.h unistd.h getopt.h])
-
-dnl Checks for typedefs, structures, and compiler characteristics.
-AC_C_CONST
 
 dnl Check for the uint{8,16,32}_t types and, if we don't have them, define
 dnl them using types which will work on most systems.
@@ -77,11 +73,6 @@ AC_CHECK_FUNC([getopt_long_only], ,
   [ AC_LIBOBJ(getopt)
     AC_LIBOBJ(getopt1)
     AC_LIBSOURCE(getopt.h) ])
-
-dnl Do we have inet_aton?  Most systems do, but some e.g. Solaris don't
-dnl If we don't have it, then use Russ Allbery's implementation as a
-dnl replacement function.
-AC_CHECK_FUNC(inet_aton, , [ AC_LIBOBJ(inet_aton) ])
 
 dnl Check for strlcat and strlcpy.  If we don't have them, use the replacement
 dnl functions from OpenBSD.  Most modern C libraries have these functions,
